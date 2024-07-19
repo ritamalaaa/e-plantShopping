@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './ProductList.css';
 import CartItem from './CartItem';
-import { useDispatch } from 'react-redux'; // Make sure you have react-redux installed
-import { addItem } from './CartSlice'; // Import the addItem action from CartSlice
+import { addItem } from './CartSlice';
 
 function ProductList() {
     const [showCart, setShowCart] = useState(false);
     const [addedToCart, setAddedToCart] = useState({});
     const dispatch = useDispatch();
+    const cartItems = useSelector((state) => state.cart.items);
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -216,10 +218,9 @@ function ProductList() {
         }
     ];
 
-
     const handleAddToCart = (plant) => {
         dispatch(addItem(plant)); // Dispatch the addItem action with the plant details
-        setAddedToCart(prevState => ({ ...prevState, [plant.name]: true })); // Update the state to reflect the product added to the cart
+        setAddedToCart(prevState => ({ ...prevState, [plant.name]: true }));
     };
 
     const handleCartClick = (e) => {
