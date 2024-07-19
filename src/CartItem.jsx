@@ -14,7 +14,7 @@ function CartItem({ onContinueShopping }) {
     };
 
     const handleAddItem = (item) => {
-        dispatch(addItem(item));
+        dispatch(addItem({ ...item, cost: Number(item.cost) }));
     };
 
     // Retrieve cart items from Redux state
