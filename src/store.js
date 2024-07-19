@@ -1,17 +1,13 @@
-import { createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
+// store.js
+
+import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './CartSlice'; // Import your cart reducer
 
-const rootReducer = combineReducers({
-    cart: cartReducer, // Add your cart reducer
+// Configure the Redux store
+const store = configureStore({
+    reducer: {
+        cart: cartReducer, // Add your cart reducer
+    },
 });
 
-const store = createStore(rootReducer);
-
-const App = () => (
-    <Provider store={store}>
-        {/* Your App components */}
-    </Provider>
-);
-
-export default App;
+export default store;
