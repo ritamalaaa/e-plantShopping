@@ -25,22 +25,26 @@ function CartItem({ onContinueShopping }) {
             <h2>Shopping Cart</h2>
             <button onClick={onContinueShopping}>Continue Shopping</button>
             <ul>
-                {cartItems.map((item, index) => (
-                    <li key={index}>
-                        <img src={item.image} alt={item.name} />
-                        <h3>{item.name}</h3>
-                        <p>{item.description}</p>
-                        <p>{item.cost}</p>
-                        <p>Quantity: {item.quantity}</p>
-                        <button onClick={() => handleUpdateQuantity(item, item.quantity + 1)}>Increase Quantity</button>
-                        <button onClick={() => handleUpdateQuantity(item, item.quantity - 1)}>Decrease Quantity</button>
-                        <button onClick={() => handleAddItem(item)}>Add More</button>
-                        <button onClick={() => handleRemoveItem(item)}>Remove Item</button>
-                    </li>
-                ))}
+                {cartItems.map((item, index) => {
+                    // Convert item.cost to a number and format it
+                    const formattedCost = Number(item.cost).toFixed(2);
+    
+                    return (
+                        <li key={index}>
+                            <img src={item.image} alt={item.name} />
+                            <h3>{item.name}</h3>
+                            <p>{item.description}</p>
+                            <p>Cost: ${formattedCost}</p>
+                            <p>Quantity: {item.quantity}</p>
+                            <button onClick={() => handleUpdateQuantity(item, item.quantity + 1)}>Increase Quantity</button>
+                            <button onClick={() => handleUpdateQuantity(item, item.quantity - 1)}>Decrease Quantity</button>
+                            <button onClick={() => handleAddItem(item)}>Add More</button>
+                            <button onClick={() => handleRemoveItem(item)}>Remove Item</button>
+                        </li>
+                    );
+                })}
             </ul>
         </div>
     );
-}
-
+    
 export default CartItem;
